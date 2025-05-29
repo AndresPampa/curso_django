@@ -51,10 +51,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'project1.urls'
 
+#Aca tenemos que poner la ruta de las plantillas que vamos a utilizar
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./project1/plantillas'], # Aquí puedes agregar la ruta a tus plantillas personalizadas, por ejemplo: [BASE_DIR / 'templates']
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

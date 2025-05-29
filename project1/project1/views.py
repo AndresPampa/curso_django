@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpRequest
-from django.template import Template, Context
+from django.template import Template, Context, loader
+# from django.template.loader import get_template
 import datetime
 
 class Persona:
@@ -10,7 +11,7 @@ class Persona:
 
 
 
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 # Como declaro una vista en django: solamente creando una funncion
 def saludo(request: HttpRequest) -> HttpResponse:
 
@@ -18,36 +19,46 @@ def saludo(request: HttpRequest) -> HttpResponse:
     nombre = "Pampa"
     apellido = "el CAPO!"
 
-    p1 = Persona("Pampa", "El CAPO!")
+    temas_del_curso = ["plantillas", "vistas", "modelos", "urls", "formularios", "listas", "Despliegue de la app"]
+    # temas_del_curso = []
 
+    p1 = Persona("Tu vieja", "El CAPO!")
 
     ahora = datetime.datetime.now()
 
-    #Levantamos el archivo
-    doc_externo = open('./project1/plantillas/primera-vista.html')
+    #Levantamos el archivo de manera manual
+    # doc_externo = open('./project1/plantillas/primera-vista.html')
+    # #Lo leemos y creamos el template
+    # plt = Template(doc_externo.read())
+    # doc_externo.close() #Lo cerramos para no estar utilizando recursos
 
-    #Lo leemos y creamos el template
-    plt = Template(doc_externo.read())
-    doc_externo.close() #Lo cerramos para no estar utilizando recursos
+    #Utilizamos un cargador de plantillas un LOADER
+    plt = loader.get_template('primera-vista.html')
 
     #creamos el contexto
     #El contexto recibe un diccionario con las variables que queremos pasar al template
-    ctx = Context({'nombre_persona': p1.nombre, # nombre
+    # ctx = Context({'nombre_persona': p1.nombre, # nombre
+    #                'apellido_persona': p1.apellido, # apellido
+    #                'momento_actual': ahora,
+    #                'temas': temas_del_curso})
+
+    ctx = {'nombre_persona': p1.nombre, # nombre
                    'apellido_persona': p1.apellido, # apellido
-                   'momento_actual': ahora})
+                   'momento_actual': ahora,
+                   'temas': temas_del_curso}
 
     documento = plt.render(ctx)
 
     #Retornamos el render con el contexto
     return HttpResponse(documento)
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 def despedida(request: HttpRequest) -> HttpResponse:
     return HttpResponse("chau pa! Vuelva Prontos!")
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 # Toma la hora y fecha del servidor.. WARNING!
 def dameFecha(request: HttpRequest) -> HttpResponse:
     fecha_actual = datetime.datetime.now()
@@ -66,10 +77,10 @@ def dameFecha(request: HttpRequest) -> HttpResponse:
     """
 
     return HttpResponse(documento)
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 
 # Django utiliza el URL friendly para que indexen bien en los buscadores y ayuda al SEO
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
 def calculaEdad(request: HttpRequest, anio: int, edad: int) -> HttpResponse:
 
     # edad_actual = 18
@@ -90,4 +101,11 @@ def calculaEdad(request: HttpRequest, anio: int, edad: int) -> HttpResponse:
     """
 
     return HttpResponse(documento)
-#----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------
+
+### Jerarquia de Django ###
+# diccionario
+# atributo 
+# Metodo 
+# Indice de lista
+

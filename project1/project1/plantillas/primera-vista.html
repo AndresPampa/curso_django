@@ -5,7 +5,40 @@
     <body>
         <h2 style="font-family: sans-serif; text-align: center;">PRIMERA PLANTILLA</h2>
 
-        <p style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;">El nombre del rey es : {{nombre_persona}} {{apellido_persona}}</p>
+        {# ACA PONEMOS COMENTARIOS!!! #}
+
+        {% comment %}
+            aca podemos poner comentarios
+            en
+            varias
+            lineas
+        {% endcomment %}
+
+        <h3 style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;">
+            {% if nombre_persona == 'Pampa' %}
+                <p>El curso lo imparte el MAS CAPO DEL MUNDO!</p>
+            {% else %}
+                <p>El curso lo imparte otra persona</p>
+            {% endif %}
+        </h3>
+
+        {# El pipe -> | es un filtro que nos permite modificar el valor de una variable. POdemos encadenar varios filtros: tema|first|upper #}
+        <p style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;">El nombre del rey es : {{nombre_persona|upper}} {{apellido_persona|upper}}</p>
         <p style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;">Estamos viendo las plantillas y hoy es: {{momento_actual.day}}/{{momento_actual.month}}/{{momento_actual.year}}</p>
+
+        <p style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;"><mark><strong>Temas del Curso</strong></mark></p>
+
+        <p style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;">
+            <ul style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;">
+            {% if temas %}
+                {% for tema in temas %}
+                    <li>{{tema|first|upper}}</li>
+                {% endfor %}
+            {% else %}
+                <p style="font-family: sans-serif; text-align: center; margin: auto; width: 80%;"><mark>No hay elementos que mostrar</mark></p>
+            {% endif %}
+            </ul>
+        </p>
+
     </body>
 </html>
