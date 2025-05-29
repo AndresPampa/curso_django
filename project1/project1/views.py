@@ -2,28 +2,52 @@ from django.http import HttpResponse, HttpRequest
 from django.template import Template, Context
 import datetime
 
+class Persona:
+
+    def __init__(self, nombre: str, apellido: str):
+        self.nombre = nombre
+        self.apellido = apellido
+
+
+
+#----------------------------------------------------------
 # Como declaro una vista en django: solamente creando una funncion
 def saludo(request: HttpRequest) -> HttpResponse:
 
+    #Declaramos una variable
+    nombre = "Pampa"
+    apellido = "el CAPO!"
+
+    p1 = Persona("Pampa", "El CAPO!")
+
+
+    ahora = datetime.datetime.now()
+
     #Levantamos el archivo
     doc_externo = open('./project1/plantillas/primera-vista.html')
+
     #Lo leemos y creamos el template
     plt = Template(doc_externo.read())
     doc_externo.close() #Lo cerramos para no estar utilizando recursos
 
     #creamos el contexto
-    ctx = Context()
+    #El contexto recibe un diccionario con las variables que queremos pasar al template
+    ctx = Context({'nombre_persona': p1.nombre, # nombre
+                   'apellido_persona': p1.apellido, # apellido
+                   'momento_actual': ahora})
 
     documento = plt.render(ctx)
 
     #Retornamos el render con el contexto
     return HttpResponse(documento)
+#----------------------------------------------------------
 
-
+#----------------------------------------------------------
 def despedida(request: HttpRequest) -> HttpResponse:
     return HttpResponse("chau pa! Vuelva Prontos!")
+#----------------------------------------------------------
 
-
+#----------------------------------------------------------
 # Toma la hora y fecha del servidor.. WARNING!
 def dameFecha(request: HttpRequest) -> HttpResponse:
     fecha_actual = datetime.datetime.now()
@@ -42,9 +66,10 @@ def dameFecha(request: HttpRequest) -> HttpResponse:
     """
 
     return HttpResponse(documento)
+#----------------------------------------------------------
 
 # Django utiliza el URL friendly para que indexen bien en los buscadores y ayuda al SEO
-
+#----------------------------------------------------------
 def calculaEdad(request: HttpRequest, anio: int, edad: int) -> HttpResponse:
 
     # edad_actual = 18
@@ -65,3 +90,4 @@ def calculaEdad(request: HttpRequest, anio: int, edad: int) -> HttpResponse:
     """
 
     return HttpResponse(documento)
+#----------------------------------------------------------
