@@ -1,22 +1,22 @@
 from django.http import HttpResponse, HttpRequest
+from django.template import Template, Context
 import datetime
 
 # Como declaro una vista en django: solamente creando una funncion
 def saludo(request: HttpRequest) -> HttpResponse:
 
-    documento = """
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-        </head>
-        <body>
-            <h1 style="font-family: sans-serif; text-align: center;;">Hola pa! esta es la primera vista de mi proyecto de Django!<h1>
-        </body>
-        </html>
-    """
+    #Levantamos el archivo
+    doc_externo = open('./project1/plantillas/primera-vista.html')
+    #Lo leemos y creamos el template
+    plt = Template(doc_externo.read())
+    doc_externo.close() #Lo cerramos para no estar utilizando recursos
 
+    #creamos el contexto
+    ctx = Context()
+
+    documento = plt.render(ctx)
+
+    #Retornamos el render con el contexto
     return HttpResponse(documento)
 
 
