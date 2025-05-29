@@ -18,9 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from project1.views import saludo
 from project1.views import despedida
+from project1.views import dameFecha
+# Me canse
+from project1.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo/', saludo),
-    path('nosvemos/', despedida)
+    path('nosvemos/', despedida),
+    path('horayfecha/', dameFecha),
+    # Esta es la forma de pasarle parametros a una vista
+    path('edades/<int:edad>/<int:anio>', calculaEdad)
 ]
