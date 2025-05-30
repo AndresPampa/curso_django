@@ -28,5 +28,7 @@ urlpatterns = [
     path('nosvemos/', despedida),
     path('horayfecha/', dameFecha),
     # Esta es la forma de pasarle parametros a una vista
-    path('edades/<int:edad>/<int:anio>', calculaEdad)
+    path('edades/<int:edad>/<int:anio>', calculaEdad),
+    path('cursoc/', curso_c),
+    path('cursocss/', curso_css),
 ]

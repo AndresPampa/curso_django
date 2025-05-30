@@ -112,3 +112,16 @@ def calculaEdad(request: HttpRequest, anio: int, edad: int) -> HttpResponse:
 # Metodo 
 # Indice de lista
 
+def curso_c(request: HttpRequest) -> HttpResponse:
+
+    fecha_actual = datetime.datetime.now()
+
+    return render(request, 'curso_c.html', {'dame_fecha': fecha_actual})
+
+
+def curso_css(request: HttpRequest) -> HttpResponse:
+
+    fecha_actual = datetime.datetime.now()
+
+    return render(request, 'cursocss.html', {'dame_fecha': fecha_actual})
+
