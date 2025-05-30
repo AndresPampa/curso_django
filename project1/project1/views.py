@@ -1,14 +1,17 @@
 from django.http import HttpResponse, HttpRequest
 from django.template import Template, Context, loader
 # from django.template.loader import get_template
+from django.shortcuts import render
+
 import datetime
+
+
 
 class Persona:
 
     def __init__(self, nombre: str, apellido: str):
         self.nombre = nombre
         self.apellido = apellido
-
 
 
 #--------------------------------------------------------------------------------------------------------------------
@@ -21,9 +24,7 @@ def saludo(request: HttpRequest) -> HttpResponse:
 
     temas_del_curso = ["plantillas", "vistas", "modelos", "urls", "formularios", "listas", "Despliegue de la app"]
     # temas_del_curso = []
-
     p1 = Persona("Tu vieja", "El CAPO!")
-
     ahora = datetime.datetime.now()
 
     #Levantamos el archivo de manera manual
@@ -33,7 +34,7 @@ def saludo(request: HttpRequest) -> HttpResponse:
     # doc_externo.close() #Lo cerramos para no estar utilizando recursos
 
     #Utilizamos un cargador de plantillas un LOADER
-    plt = loader.get_template('primera-vista.html')
+    # plt = loader.get_template('primera-vista.html')
 
     #creamos el contexto
     #El contexto recibe un diccionario con las variables que queremos pasar al template
@@ -47,10 +48,12 @@ def saludo(request: HttpRequest) -> HttpResponse:
                    'momento_actual': ahora,
                    'temas': temas_del_curso}
 
-    documento = plt.render(ctx)
+    # documento = plt.render(ctx)
 
     #Retornamos el render con el contexto
-    return HttpResponse(documento)
+    # return HttpResponse(documento)
+
+    return render(request, 'primera-vista.html', ctx)
 #--------------------------------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------------------------------
