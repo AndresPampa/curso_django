@@ -51,5 +51,32 @@ retorna: (1, {'gestionPedidos.Articulos': 1})
 >>> lista=Articulos.objects.all()
 >>> lista
 retorna: <QuerySet [<Articulos: Articulos object (1)>, <Articulos: Articulos object (3)>]>
+
+En esta parte creamos el __str__() y corremos  ```python manage.py makemigrations``` y despues ```python manage.py migrate```
+
 >>> lista.query.__str__()
 retorna: 'SELECT "gestionPedidos_articulos"."id", "gestionPedidos_articulos"."nombre", "gestionPedidos_articulos"."seccion", "gestionPedidos_articulos"."precio" FROM "gestionPedidos_articulos"'
+
+### SELECT con WHERE
+
+Articulos.objects.filter(nombre='mesa', seccion='decoracion')
+
+Si queresmos escribir menor que < o mayor que > debemos utilizar caracteres especiales:   
+__gte= -> "grater than" y __lte= -> "lesser than"  
+o hay una funcion para rangos de valores -> __range(10, 150)
+
+Articulos.objects.filter(nombre='mesa', seccion__get=100)
+
+### ORDER BY
+
+Articulos.objects.filter(precio__get=50).order_by('-precio') #El signo menos es para indicar el ```DESC```
+
+
+## Create Super User
+
+Nombre de usuario (leave blank to use 'user Random'): 
+Dirección de email: mail@mail.com
+Password: **********
+Password (again): **********
+Superuser created successfully.
+
