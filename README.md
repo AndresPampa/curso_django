@@ -73,7 +73,7 @@ Articulos.objects.filter(precio__get=50).order_by('-precio') #El signo menos es 
 
 
 ## Create Super User
-
+----> python manage.py createsuperuser
 Nombre de usuario (leave blank to use 'user Random'): 
 Dirección de email: mail@mail.com
 Password: **********
