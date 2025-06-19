@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from gestionPedidos.models import *
 from django.conf import settings  # Para acceder a las configuraciones del proyecto
 from django.core.mail import send_mail
+from gestionPedidos.forms import FormularioContacto
 
 # Create your views here.
 
@@ -29,23 +30,49 @@ def buscar(request):
     return HttpResponse(mensaje)
 
 
-
+# def contacto(request):
+#     if request.method == 'POST':
+#         subject = request.POST['asunto']
+#         message = request.POST['mensaje'] + request.POST['email']
+#         #Email no de donde viene. NO confundir con el email que nos envia el usuario
+#         email_from = settings.EMAIL_HOST_USER
+#         #todas las direcciones de correo a las que se enviara el mensaje
+#         recipient_list = ["mail@mail.com"]
+#         send_mail(subject, message, email_from, recipient_list)
+#         return render(request, 'gracias.html')
+#     return render(request, 'contacto.html')
 
 def contacto(request):
 
     if request.method == 'POST':
 
-        subject = request.POST['asunto']
-        message = request.POST['mensaje'] + request.POST['email']
+        mi_formulario = FormularioContacto(request.POST)
+        if mi_formulario.is_valid():
 
-        #Email no de donde viene. NO confundir con el email que nos envia el usuario
-        email_from = settings.EMAIL_HOST_USER
+            # asunto = mi_formulario.cleaned_data['']
+            # email = mi_formulario.cleaned_data['']
+            # mensaje = mi_formulario.cleaned_data[''] 
+            #Toda la info
+            informacion = mi_formulario.cleaned_data
 
-        #todas las direcciones de correo a las que se enviara el mensaje
-        recipient_list = ["mail@mail.com"]
+            send_mail(
+                informacion['asunto'],
+                informacion['mensaje'],
+                informacion.get('email', settings.EMAIL_HOST_USER),  # Usar el email del formulario o el configurado en settings
+                ["tuvieja@mail.com"], #Direccion de correo a la que se enviara el mensaje
+            )
 
-        send_mail(subject, message, email_from, recipient_list)
+            return render(request, 'gracias.html')
+        
+    else:
 
-        return render(request, 'gracias.html')
+        mi_formulario = FormularioContacto() #Construye el formulario vacio
+        #Ahora hay que decirle a django que contruya un html con la informacion del formulario
+    
+    return render(request, 'formulario_contacto.html', {'form': mi_formulario}) #le tenemos que decir que renderice el formulario en el html
 
-    return render(request, 'contacto.html')
+
+
+def bienvenida(request):
+    return render(request, 'bienvenida.html')
+
