@@ -80,3 +80,8 @@ Password: **********
 Password (again): **********
 Superuser created successfully.
 
+## Enviar un Mail por consola
+python manage.py shell
+>>> from django.core.mail import send_mail
+>>> send_mail('asunto', 'mensaje', 'tuvieja@gmail.com', ['cursos@django.com.ar'], fail_silently=False)
+
