@@ -19,6 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('servicios/', include('servicios.urls')), #Agregamos los urls de la app de servicios
     path('', include('ProyectoWebApp.urls')), #Dejamos vacia la raiz para que se cargue la app por defecto
+
 
 ]
