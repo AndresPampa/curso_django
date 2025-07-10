@@ -85,3 +85,5 @@ python manage.py shell
 >>> from django.core.mail import send_mail
 >>> send_mail('asunto', 'mensaje', 'tuvieja@gmail.com', ['cursos@django.com.ar'], fail_silently=False)
 
+## MAPEO ORM
+Django tiliza un mapeo orm: object relational mapping. Consiste en crear una clase para poder manipular tablas utilizando POO.
