@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ProyectoWebApp',  # Your application
     'servicios',
+    'blog', # Aplicación de blog
 ] #No olvidar la coma al final de la lista de aplicaciones instaladas, si no, dará error al ejecutar el servidor
 
 MIDDLEWARE = [
