@@ -36,11 +36,15 @@
 
                 {% for categoria in post.categoria.all %}
 
-                   &nbsp; {{categoria.nombre}} &nbsp;&nbsp;
+                   &nbsp;<a href="{% url 'categoria' categoria.id %}" class="linksCategorias">{{categoria.nombre}}</a> &nbsp;&nbsp;
+
 
                 {% endfor %}
 
+
             {% endfor %}
+
+                <!-- &nbsp;<a href="{% url 'blog' %}">Volver a Blog</a> &nbsp;&nbsp; -->
 
 
         </div>
