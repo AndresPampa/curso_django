@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ProyectoWebApp',  # Your application
     'servicios',
     'blog', # Aplicación de blog
+    'contacto',
 ] #No olvidar la coma al final de la lista de aplicaciones instaladas, si no, dará error al ejecutar el servidor
 
 MIDDLEWARE = [
