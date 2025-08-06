@@ -4,6 +4,13 @@
 
 {% block content %}
 
-<div style="color: white; text-align: center; margin: auto;"><p>{{formulario}}</p></div>
+<div class="contenedorFormulario">
+    <form action="" method="POST">
+        <!-- Esto lo que hace es agregar un campo oculto que introducen un codigo cambiante -->
+        {% csrf_token %}
+        <table style="color: white; margin: 20px auto;">{{formulario.as_table}}</table>
+        <input type="submit" value="Enviar" style="width: 150px;">
+    </form>
+</div>
 
 {% endblock %}
