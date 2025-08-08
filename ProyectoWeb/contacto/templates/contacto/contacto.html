@@ -5,6 +5,11 @@
 {% block content %}
 
 <div class="contenedorFormulario">
+
+    {% if "valido" in request.GET %}
+    <strong><p style="color: yellow;">Informacion enviada Correctamente</p></strong> 
+    {% endif %}
+
     <form action="" method="POST">
         <!-- Esto lo que hace es agregar un campo oculto que introducen un codigo cambiante -->
         {% csrf_token %}
