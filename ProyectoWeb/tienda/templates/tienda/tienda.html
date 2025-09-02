@@ -4,6 +4,17 @@
 
 {% block content %}
 
-<div><p style="color: white;">ESTAMOS EN LA APP DE LA TIENDA</p></div>
+<div class="row text-center">
+    {% for producto in productos %}
+        <div class="card" style="width: 10%; ">
+            <img src="{{producto.imagen.url}}" alt="">
+
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
+
+    <!-- <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="" alt="" style="width: 50%;">
+                            <span class="section-heading-lower">{{producto.nombre}}</span>
+                            <span class="section-heading-upper">{{producto.precio}}</span> -->
