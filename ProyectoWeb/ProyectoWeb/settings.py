@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog', # Aplicación de blog
     'contacto',
     'tienda',
+    'carro',
 ] #No olvidar la coma al final de la lista de aplicaciones instaladas, si no, dará error al ejecutar el servidor
 
 MIDDLEWARE = [
