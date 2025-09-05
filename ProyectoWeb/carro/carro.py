@@ -3,7 +3,7 @@ from django.http import HttpRequest
 class Carro:
 
     def __init__(self, request: HttpRequest) -> None:
-        self.request = request #Petision del cliente para abirr el carrito
+        self.request = request #Peticion del usuario
         self.session = request.session #Sesion de carrito
         carro = self.session.get("carro")
 
@@ -27,7 +27,7 @@ class Carro:
             for key, value in self.carro.items():
                 if key == str(producto.id):
                     value["cantidad"] = value["cantidad"] + 1
-                    #! aflata actualizar el precio 
+                    value["precio"] = str(float(producto.precio) * value["cantidad"])
                     break
         
         self.guardar_carro()
@@ -39,7 +39,7 @@ class Carro:
 
     #Eliminar productos del carro
     def eliminar(self, producto: dict) -> None:
-        producto.id = str(producto.id)
+        producto.id = str(producto.id) #* Este paso me parece que esta al pedo
         if producto.id in self.carro:
             del self.carro[producto.id]
             self.guardar_carro() #Actualizamos el carro(session)
@@ -49,7 +49,7 @@ class Carro:
         for key, value in self.carro.items():
             if key == str(producto.id):
                 value["cantidad"] = value["cantidad"] - 1
-                #! aflata actualizar el precio 
+                value["precio"] = str(float(value["precio"]) * value["cantidad"]) 
                 if value["cantidad"] < 1:
                     self.eliminar(producto)
                 break
