@@ -10,8 +10,8 @@ class Carro:
         #Chequear si existe el carro o sino existe
         if not carro:
             carro = self.session["carro"] = {}
-        else:
-            self.carro = carro
+
+        self.carro = carro
 
     #El carro debe agregar productos
     def agregar(self, producto: dict) -> None:
@@ -27,7 +27,7 @@ class Carro:
             for key, value in self.carro.items():
                 if key == str(producto.id):
                     value["cantidad"] = value["cantidad"] + 1
-                    value["precio"] = str(float(producto.precio) * value["cantidad"])
+                    value["precio"] = str(float(value["precio"]) + float(producto.precio))
                     break
         
         self.guardar_carro()
@@ -49,7 +49,7 @@ class Carro:
         for key, value in self.carro.items():
             if key == str(producto.id):
                 value["cantidad"] = value["cantidad"] - 1
-                value["precio"] = str(float(value["precio"]) * value["cantidad"]) 
+                value["precio"] = str(float(value["precio"]) - float(producto.precio))
                 if value["cantidad"] < 1:
                     self.eliminar(producto)
                 break

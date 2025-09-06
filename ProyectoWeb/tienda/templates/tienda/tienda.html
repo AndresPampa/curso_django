@@ -9,7 +9,7 @@
 <div class="container text-center">
 
         <div style="float: right;">
-            <p style="color: white;">Carrito</p>
+            {% include "carro/widget.html" %}
         </div>
 
     <div class="row text-align">
@@ -22,7 +22,7 @@
                     <p class="class-text">${{producto.precio}}</p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-success">Agregar</a>
+                    <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar</a>
                 </div>
             </div>
         </div>
