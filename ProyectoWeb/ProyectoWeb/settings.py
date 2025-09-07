@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'tienda',
     'carro',
     'autenticacion',
+    'crispy_forms', #Para mejorar la apariencia de los formularios
+    "crispy_bootstrap4",
 ] #No olvidar la coma al final de la lista de aplicaciones instaladas, si no, dará error al ejecutar el servidor
 
 MIDDLEWARE = [
@@ -141,3 +143,7 @@ EMAIL_HOST_PASSWORD = 'mipassword123'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#cargar crispy forms en boostrap
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
