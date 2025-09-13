@@ -5,5 +5,7 @@ def importe_total_carro(request):
     if "carro" in request.session:
         for key, value in request.session["carro"].items():
             total = total + (float(value["precio"]))
+    else:
+        total = "Debes hacer Login" #Solucion temporal para que no rompa al no estar logueado
     
     return {"importe_total_carro": total}
